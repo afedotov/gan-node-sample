@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "gan-web-bluetooth": "^2.2.0",
+    "gan-web-bluetooth": "^2.2.1",
     "webbluetooth": "^3.2.1"
   }
 }
