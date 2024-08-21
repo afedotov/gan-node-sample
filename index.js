@@ -45,9 +45,9 @@ readline.on('line', (input) => {
 async function customMacAddressProvider(device) {
     var mac = [];
     var mfData = [...device._adData.manufacturerData.values()][0];
-    if (mfData && mfData.byteLength >= 6) {
-        for (let i = 1; i <= 6; i++) {
-            mac.push(mfData.getUint8(mfData.byteLength - i).toString(16).toUpperCase().padStart(2, "0"));
+    if (mfData && mfData.byteLength >= 9) {
+        for (let i = 8; i > 2; i--) {
+            mac.push(mfData.getUint8(i).toString(16).toUpperCase().padStart(2, "0"));
         }
     }
     return mac.join(':');
@@ -66,8 +66,8 @@ async function main() {
     });
 
     await conn.sendCubeCommand({ type: "REQUEST_HARDWARE" });
-    await conn.sendCubeCommand({ type: "REQUEST_BATTERY" });
     await conn.sendCubeCommand({ type: "REQUEST_FACELETS" });
+    await conn.sendCubeCommand({ type: "REQUEST_BATTERY" });
 
 }
 
